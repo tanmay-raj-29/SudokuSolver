@@ -1,3 +1,4 @@
+import sudokuChecker
 import fileinput
 import time
 
@@ -129,9 +130,14 @@ def main():
                 if 0 in line:
                     DFS_solve(board, 0, 0)
                     break
-
-            print("Solution:")
-            print_sudoku(board)
+            
+            try:
+                if sudokuChecker.checkSolution(board) == False:
+                    raise ValueError
+                print("Solution:")
+                print_sudoku(board)
+            except ValueError:
+                print("Could not find solution!!\nMaybe there is a mistake in the sudoku.\nPlease check.")
 
             print("="*30)
             board = []
